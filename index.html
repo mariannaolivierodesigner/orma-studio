@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Orma — Studio di interior design</title>
+<meta name="description" content="Orma è uno studio di interior design: progetti, servizi e approfondimenti dallo studio.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:auto}
+body{font-family:'Inter',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:16px;line-height:1.3;letter-spacing:-.04em;color:#000;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button,input,select,textarea{font:inherit;letter-spacing:inherit;color:inherit}
+ul{list-style:none}
+:root{--pad:40px;--g1:#999;--g2:#605f5f;--g3:#aeaeae;--soft:#f4f4f4;--ease:cubic-bezier(.2,.7,.2,1)}
+
+/* tipografia */
+.up{text-transform:uppercase}
+.lab{font-size:13px;line-height:1.3;letter-spacing:-.03em;text-transform:uppercase;font-weight:500}
+.t80{font-size:80px;line-height:96px;letter-spacing:-.05em}
+.t56{font-size:56px;line-height:67.2px;letter-spacing:-.05em}
+.t32{font-size:32px;line-height:41.6px;letter-spacing:-.05em}
+.t26{font-size:26px;line-height:33.8px;letter-spacing:-.05em}
+.t24{font-size:24px;line-height:31.2px;letter-spacing:-.04em}
+.t20{font-size:20px;line-height:28px;letter-spacing:-.04em}
+.body{font-size:16px;line-height:20.8px;letter-spacing:-.04em;font-weight:400;color:var(--g2)}
+.mut{color:var(--g1)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}
+
+/* header */
+#hdr{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:flex-start;padding:20px var(--pad) 0;color:#fff;pointer-events:none}
+#hdr .logo,#hdr .mbtn{color:#fff;transition:color .25s}
+#hdr .mbtn{color:inherit}
+#hdr.lt .logo,#hdr.lt .mbtn{color:#000}
+body.menu-open #hdr .logo,body.menu-open #hdr .mbtn{color:#fff!important}
+#hdr>*{pointer-events:auto}
+.logo{font-size:18px;font-weight:600;line-height:1.3;letter-spacing:-.02em}
+.mbtn{display:flex;align-items:center;gap:6px;background:none;border:0;cursor:pointer;font-size:16px;font-weight:500;text-transform:uppercase;letter-spacing:-.03em;line-height:1;padding-top:4px}
+.mbtn i{position:relative;width:14px;height:14px;display:block;transition:transform .5s var(--ease)}
+.mbtn i:before,.mbtn i:after{content:"";position:absolute;background:currentColor;left:0;right:0;top:50%;height:1px}
+.mbtn i:after{transform:rotate(90deg)}
+body.menu-open .mbtn i{transform:rotate(45deg)}
+
+#menu{position:fixed;left:0;right:0;top:0;height:66vh;min-height:420px;background:#000;z-index:55;display:flex;align-items:center;justify-content:center;clip-path:inset(0 0 100% 0);transition:clip-path .7s var(--ease)}
+body.menu-open #menu{clip-path:inset(0 0 0 0)}
+#menu ul{text-align:center}
+#menu a{display:block;color:#fff;font-size:clamp(38px,3.4vw,52px);line-height:1.14;letter-spacing:-.05em;opacity:0;transform:translateY(16px);transition:opacity .5s,transform .6s var(--ease)}
+body.menu-open #menu a{opacity:1;transform:none}
+body.menu-open #menu li:nth-child(1) a{transition-delay:.15s}
+body.menu-open #menu li:nth-child(2) a{transition-delay:.2s}
+body.menu-open #menu li:nth-child(3) a{transition-delay:.25s}
+body.menu-open #menu li:nth-child(4) a{transition-delay:.3s}
+body.menu-open #menu li:nth-child(5) a{transition-delay:.35s}
+#menu a:hover{opacity:.55}
+
+/* hero home */
+.hero{position:fixed;inset:0 0 auto 0;height:100vh;z-index:0;background:#000;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,0) 28%,rgba(0,0,0,0) 62%,rgba(0,0,0,.34))}
+.hero .in{position:absolute;inset:0;z-index:2;color:#fff;padding:0 var(--pad)}
+.hero h1{position:absolute;left:var(--pad);top:37.8vh;font-weight:500;line-height:.9;letter-spacing:-.05em}
+.hero h1 b{display:block;font-weight:500;font-size:clamp(60px,7.8vw,150px);line-height:.9}
+.hero h1 span{display:block;font-size:clamp(38px,5.02vw,96px);line-height:.9;margin-top:.14em}
+.hero .meta{position:absolute;right:var(--pad);top:47.2vh;display:flex;gap:18px;white-space:nowrap}
+.hero .meta .s{color:rgba(255,255,255,.4)}
+.hero .tag{position:absolute;left:var(--pad);bottom:64px;width:500px;max-width:calc(100% - 2*var(--pad));font-size:16px;line-height:20.8px;color:#e6e6e6;letter-spacing:-.04em}
+.hero .go{position:absolute;right:var(--pad);bottom:68px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #fff;padding-bottom:5px}
+.hero .go svg{width:12px;height:12px}
+#home-body{position:relative;z-index:2;margin-top:100vh;background:#000}
+
+/* progetti home (striscia) */
+.pj{background:#000;min-height:100vh;display:flex;align-items:center;padding:0 var(--pad)}
+.strip{display:flex;gap:8px;align-items:center;width:100%;position:relative}
+.pc{flex:1 1 0;min-width:0;aspect-ratio:1/1;position:relative;display:block;transition:flex-grow .7s var(--ease)}
+.pc.active{flex-grow:2}
+.pc .im{position:absolute;inset:0;overflow:hidden}
+.pc img{width:100%;height:100%;object-fit:cover;filter:brightness(.5);transition:filter .6s,transform .9s var(--ease)}
+.pc.active img{filter:none}
+.pc .cap{position:absolute;left:0;top:calc(100% + 30px);width:100%;opacity:0;transform:translateY(8px);transition:opacity .5s,transform .6s var(--ease);pointer-events:none}
+.pc.active .cap{opacity:1;transform:none;transition-delay:.15s}
+.pc .cap h3{font-size:16px;line-height:16px;font-weight:500;letter-spacing:-.03em;text-transform:uppercase;color:#fff;margin-bottom:8px}
+.pc .cap p{font-size:16px;line-height:20.8px;font-weight:400;color:rgba(255,255,255,.6);letter-spacing:-.04em}
+.brk{position:absolute;width:9px;height:9px;border:1px solid #fff;opacity:0;transition:opacity .4s;pointer-events:none}
+.brk.tr{top:-4px;right:-4px;border-left:0;border-bottom:0}
+.brk.bl{bottom:-4px;left:-4px;border-right:0;border-top:0}
+.pc.active .brk{opacity:1}
+
+/* servizi */
+.sv{background:#fff;padding:128px var(--pad)}
+.sv-grid{display:grid;grid-template-columns:342px 1fr;gap:0}
+.sv-list{margin-top:36px;border-bottom:1px solid #e6e6e6}
+.sv-it{border-top:1px solid #e6e6e6;padding:20px 0;position:relative;cursor:pointer}
+.sv-it .hd{display:flex;justify-content:space-between;align-items:center}
+.sv-it h3{font-weight:500;font-size:56px;line-height:67.2px;letter-spacing:-.05em}
+.sv-it .pl{position:relative;width:14px;height:14px;color:#999;flex:none;margin-right:8px;transition:transform .5s var(--ease)}
+.sv-it .pl:before,.sv-it .pl:after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:currentColor}
+.sv-it .pl:after{transform:rotate(90deg)}
+.sv-it.open .pl{transform:rotate(45deg)}
+.sv-it .bd{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s var(--ease)}
+.sv-it.open .bd{grid-template-rows:1fr}
+.sv-it .bd>div{overflow:hidden;position:relative}
+.sv-it .bd .in{padding-top:24px;min-height:113px;position:relative}
+.sv-it .bd p{max-width:600px}
+.sv-it .fr{display:flex;align-items:baseline;gap:8px;margin-top:20px}
+.sv-it .fr .lab{color:var(--g3)}
+.sv-it .th{position:absolute;right:0;top:24px;width:150px;height:113px;object-fit:cover}
+.sv-it .bd .in{padding-bottom:0}
+
+/* chi siamo (home) */
+.ab{background:#000;color:#fff;height:100vh;min-height:760px;padding:40px var(--pad);position:relative;overflow:hidden}
+.ab .txt{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:600px;max-width:calc(100% - 2*var(--pad) - 400px)}
+.ab .txt .lab{color:rgba(255,255,255,.7);margin-bottom:0}
+.ab .txt p{font-size:26px;line-height:33.8px;letter-spacing:-.05em;margin-top:0}
+.ab .txt p+p{margin-top:40px}
+.col{position:absolute;top:0;bottom:0;width:180px;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(180deg,transparent,#000 14%,#000 86%,transparent)}
+.col.l{left:var(--pad)}.col.r{right:var(--pad)}
+.col .tr{display:flex;flex-direction:column;gap:8px;animation:up 60s linear infinite}
+.col.r .tr{animation-name:down;animation-duration:70s}
+.col img{width:180px;height:180px;object-fit:cover;flex:none}
+@keyframes up{to{transform:translateY(calc(-50% - 4px))}}
+@keyframes down{from{transform:translateY(calc(-50% - 4px))}to{transform:none}}
+
+/* diario */
+.jr{background:#fff;padding:128px var(--pad)}
+.jr .hd{margin-left:342px;margin-bottom:64px;padding-left:0}
+.jr .hd .lab{color:var(--g1);margin-bottom:16px}
+.jc-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.jc{background:var(--soft);padding:12px;min-height:430px;display:flex;flex-direction:column;position:relative}
+.jc .im{position:relative;aspect-ratio:306/230;overflow:hidden;background:#000}
+.jc .im img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.jc:hover .im img{transform:scale(1.05)}
+.jc .brk{opacity:1;top:auto;bottom:auto}
+.jc .brk.tr{top:8px;right:8px}.jc .brk.bl{bottom:8px;left:8px}
+.jc .tx{margin-top:auto;padding:8px}
+.jc .tx h3{font-size:20px;line-height:28px;letter-spacing:-.04em;font-weight:500;margin-bottom:16px}
+.au{display:flex;align-items:center;gap:8px;color:var(--g2)}
+.au i{display:block;width:24px;height:1px;background:#999}
+
+/* contatti */
+.ct{background:#000;color:#fff;padding:128px var(--pad)}
+.ct h2{margin-left:502px}
+.ct .wrap{display:grid;grid-template-columns:422px 1fr;gap:80px;margin-top:40px;align-items:start}
+.ct .arrow{color:var(--g2);font-size:20px;height:40px;line-height:1}
+.ct .info{display:flex;flex-direction:column;gap:8px;margin-top:0}
+.ct .box{background:#1a1a1a;height:113px;padding:12px;display:flex;flex-direction:column;justify-content:space-between}
+.ct .box .lab{color:rgba(255,255,255,.6)}
+.ct .box a{font-size:24px;line-height:31.2px;letter-spacing:-.04em}
+.ct .info img{width:100%;height:113px;object-fit:cover}
+.ct form{margin-top:0;padding-top:0}
+.fld{margin-bottom:21px}
+.fld label{display:block;font-size:13px;text-transform:uppercase;letter-spacing:-.03em;margin-bottom:8px;line-height:1.3}
+.fld input,.fld select,.fld textarea{width:100%;background:none;border:0;border-bottom:1px solid rgba(255,255,255,.2);padding:0 0 12px;font-size:13px;font-weight:400;color:#fff;outline:none;border-radius:0;appearance:none;-webkit-appearance:none;letter-spacing:-.02em}
+.fld select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none' stroke='%23fff' stroke-width='1'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 2px center}
+.fld select option{color:#000}
+.fld input::placeholder,.fld textarea::placeholder{color:rgba(255,255,255,.5)}
+.fld textarea{height:80px;resize:vertical}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:#fff;color:#000;border:0;height:40px;width:200px;font-size:13px;text-transform:uppercase;letter-spacing:-.03em;cursor:pointer;margin-top:36px;transition:opacity .3s}
+.btn:hover{opacity:.8}
+.fnote{font-size:13px;color:rgba(255,255,255,.6);margin-top:16px;min-height:18px;font-weight:400}
+
+/* footer */
+.ft{padding:80px var(--pad) 40px;background:#fff;color:#000}
+.ft.dark{background:#000;color:#fff}
+.ft .top{display:flex;justify-content:space-between;gap:40px}
+.ft .nl{width:500px;max-width:100%}
+.ft .nl p{font-size:24px;line-height:31.2px;color:var(--g2);letter-spacing:-.04em;margin-bottom:32px}
+.ft.dark .nl p{color:var(--g1)}
+.ft .nl form{display:flex;height:40px;max-width:500px}
+.ft .nl input{flex:1;min-width:0;background:var(--soft);border:0;padding:0 12px;font-size:13px;font-weight:400;outline:none;border-radius:0}
+.ft.dark .nl input{background:#1a1a1a;color:#fff}
+.ft .nl button{background:#fff;border:0;padding:0 16px;font-size:13px;text-transform:uppercase;letter-spacing:-.03em;cursor:pointer;color:#000}
+.ft .nl small{display:block;margin-top:10px;font-size:13px;color:var(--g1);font-weight:400;min-height:18px}
+.ft nav a{display:block;font-size:32px;line-height:41.6px;letter-spacing:-.05em;transition:opacity .3s}
+.ft nav a:hover{opacity:.5}
+.ft .bot{display:flex;justify-content:space-between;margin-top:80px;gap:20px}
+.ft .bot .so{display:flex;gap:20px}
+.ft .bot .cr{color:var(--g2)}
+.ft.dark .bot .cr{color:#fff}
+
+/* pagine interne: intestazioni */
+.ph{padding:168px var(--pad) 0;background:#fff}
+.ph .t80{max-width:800px}
+.chips{display:flex;gap:20px;margin-top:80px}
+.chips button{background:none;border:0;cursor:pointer;color:var(--g1);padding:0;transition:color .3s}
+.chips button.on,.chips button:hover{color:#000}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 var(--pad)}
+.pcard{display:block}
+.pcard .im{position:relative;aspect-ratio:1/1;overflow:hidden;background:#111}
+.pcard .im img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.pcard:hover .im img{transform:scale(1.06)}
+.pcard .im:after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .5s}
+.pcard:hover .im:after{background:rgba(0,0,0,.28)}
+.pcard .vm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:-.03em;z-index:2;opacity:0;transition:opacity .5s;white-space:nowrap}
+.pcard:hover .vm{opacity:1}
+.pcard h3{font-size:20px;line-height:28px;letter-spacing:-.04em;margin-top:20px;font-weight:500}
+.pcard .mt{display:flex;gap:20px;color:var(--g1);margin-top:4px}
+.pcard.hide{display:none}
+
+/* articoli */
+.acard{display:block}
+.acard .im{position:relative;aspect-ratio:1/1;overflow:hidden;background:#111}
+.acard .im img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.acard:hover .im img{transform:scale(1.15)}
+.acard .im:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,0) 35%);pointer-events:none}
+.acard .mt{position:absolute;left:20px;top:20px;z-index:2;display:flex;gap:20px;color:#fff}
+.acard .ex{position:absolute;left:20px;right:20px;bottom:0;z-index:2;color:#fff;font-size:15px;line-height:19.5px;letter-spacing:-.04em;transform:translateY(110%);transition:transform .7s var(--ease);padding-bottom:20px}
+.acard .im .gr{position:absolute;inset:auto 0 0 0;height:50%;background:linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,0));opacity:0;transition:opacity .6s;z-index:1}
+.acard:hover .ex{transform:none}
+.acard:hover .im .gr{opacity:1}
+.acard h3{font-size:20px;line-height:28px;letter-spacing:-.04em;margin-top:20px;font-weight:500;padding-right:20px}
+.acard.hide{display:none}
+.ph .cnt{position:absolute;right:var(--pad);top:284px;color:var(--g2)}
+.ph .lead{margin-top:24px;color:var(--g1);font-size:16px;max-width:1302px}
+
+/* dettaglio progetto */
+.dh{position:relative;height:100vh;min-height:640px;background:#000;color:#fff;overflow:hidden}
+.dh>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.dh:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,0) 30%,rgba(0,0,0,0) 45%,rgba(0,0,0,.55))}
+.dh .in{position:absolute;left:var(--pad);right:var(--pad);bottom:40px;z-index:2}
+.dh .meta{display:flex;gap:18px;margin-bottom:34px}
+.dh .meta .s{color:rgba(255,255,255,.4)}
+.dh h1{font-size:80px;line-height:96px;letter-spacing:-.05em;font-weight:500}
+.pd{background:#fff;padding:40px var(--pad) 128px;display:grid;grid-template-columns:422px 1fr;gap:80px}
+.pd .side{position:relative}
+.pd .stk{position:sticky;top:110px;margin-top:587px}
+.pd .stk h2{font-size:32px;line-height:41.6px;letter-spacing:-.05em;font-weight:500;margin-bottom:12px}
+.pd .stk p{font-size:16px;line-height:20.8px;color:var(--g2);font-weight:500}
+.pd dl{margin-top:64px}
+.pd dl div{display:grid;grid-template-columns:211px 1fr;margin-bottom:25px}
+.pd dt{color:var(--g1)}
+.pd .main img{width:100%;aspect-ratio:3/2;object-fit:cover;margin-bottom:8px}
+.pd .main .blk{padding:33px 0 121px}
+.pd .main .blk h3{font-size:26px;line-height:33.8px;letter-spacing:-.05em;font-weight:500;margin-bottom:20px}
+.pd .main .blk p+p{margin-top:21px}
+.pd .main .blk.last{padding-bottom:0}
+.mr{background:#fff;padding:0 var(--pad) 128px}
+.mr h2{margin-bottom:64px}
+
+/* dettaglio articolo */
+.ah{position:relative;height:765px;background:#000;color:#fff;overflow:hidden}
+.ah>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ah:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.05) 35%,rgba(0,0,0,.3))}
+.ah>*{z-index:2}
+.ah .back{position:absolute;left:var(--pad);top:129px;display:flex;align-items:center;gap:10px;z-index:3;margin-left:22px}
+.ah .rt{position:absolute;left:var(--pad);bottom:97px;color:rgba(255,255,255,.7);margin-left:2px;z-index:3}
+.ah .tt{position:absolute;left:492px;right:var(--pad);bottom:97px;z-index:3}
+.ah .tt .lab{color:rgba(255,255,255,.7);margin-bottom:93px}
+.ah .tt h1{font-size:56px;line-height:67.2px;letter-spacing:-.05em;max-width:650px;margin-bottom:32px}
+.ah .tt p{color:rgba(255,255,255,.7);max-width:650px;font-size:16px;line-height:20.8px;letter-spacing:-.04em}
+.ac{background:#fff;padding:128px var(--pad);display:grid;grid-template-columns:422px 1fr;gap:30px;position:relative}
+.ac .side{padding-left:20px;margin-left:0}
+.ac .stk{position:sticky;top:110px}
+.ac .who{display:flex;align-items:center;gap:12px;margin-left:16px;margin-top:16px}
+.ac .who img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.ac .who b{display:block;font-size:16px;line-height:20.8px;font-weight:500}
+.ac .who span{display:block;font-size:14px;line-height:18.2px;color:var(--g2)}
+.cta{background:var(--soft);padding:20px;width:300px;margin-top:100px;margin-left:20px}
+.cta h4{font-size:20px;line-height:28px;font-weight:500;letter-spacing:-.04em;margin-bottom:6px}
+.cta p{font-size:14px;line-height:18.2px;color:var(--g2);font-weight:400;margin-bottom:24px}
+.cta a{display:inline-flex;background:#fff;height:41px;padding:0 16px;align-items:center;font-size:13px;text-transform:uppercase;letter-spacing:-.03em}
+.ac .main{max-width:893px;margin-left:30px}
+.ac .main h2{font-size:32px;line-height:41.6px;letter-spacing:-.05em;font-weight:500;margin:40px 0 20px}
+.ac .main h2:first-child{margin-top:0}
+.ac .main p{margin-bottom:20px}
+.mr.art h2{margin-bottom:64px}
+
+/* chi siamo (pagina) */
+.ah2{background:#fff;padding:168px var(--pad) 0;height:675px;position:relative}
+.ah2 .lab{position:absolute;left:50%;transform:translateX(-50%);top:437px;color:var(--g1)}
+.logos{position:absolute;left:0;right:0;top:561px;overflow:hidden;height:48px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.logos .tr{display:flex;gap:140px;align-items:center;width:max-content;animation:lg 40s linear infinite;padding-top:8px}
+.logos img{height:32px;width:auto;flex:none}
+@keyframes lg{to{transform:translateX(-50%)}}
+.big{background:#fff;padding:0 var(--pad);height:845px}
+.big .box{position:relative;height:100%;overflow:hidden;background:#111}
+.big img{position:absolute;left:0;width:100%;height:118%;top:-9%;object-fit:cover;will-change:transform}
+.big .box:after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.18)}
+.big h3{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;z-index:2;font-size:32px;letter-spacing:-.05em}
+.aw{background:#fff;padding:128px var(--pad)}
+.aw h2{max-width:900px}
+.aw-list{margin-top:67px;border-bottom:1px solid #e6e6e6}
+.aw-it{border-top:1px solid #e6e6e6;padding:21px 0 21px 32px;cursor:pointer;display:grid;grid-template-columns:681px 1fr auto;column-gap:0;align-items:start}
+.aw-it .nm{font-size:16px;line-height:20.8px}
+.aw-it .pj2{color:var(--g1);padding-top:2px}
+.aw-it .yr{font-size:16px;line-height:20.8px;text-align:right;padding-right:0}
+.aw-it .ex{grid-column:1/-1;display:grid;grid-template-columns:681px 1fr;overflow:hidden;max-height:0;opacity:0;transition:max-height .6s var(--ease),opacity .5s}
+.aw-it.open .ex{max-height:140px;opacity:1}
+.aw-it .ex p{font-size:14px;line-height:18.2px;color:var(--g2);padding:17px 40px 0 0;font-weight:500;letter-spacing:-.03em}
+.aw-it .ex img{width:120px;height:80px;object-fit:cover;margin-top:17px}
+.mx{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:44px}
+.mx .lb{color:var(--g2)}
+.mx .nb{font-size:64px;line-height:64px;letter-spacing:-.05em;margin-top:16px}
+.tm{background:var(--soft);padding:128px var(--pad);display:grid;grid-template-columns:1fr 628px;gap:80px;align-items:start}
+.tm .stk{position:sticky;top:120px}
+.tm .stk .lab{color:var(--g1);margin-bottom:20px}
+.tm .stk h2{max-width:520px;margin-bottom:130px}
+.tm .stk strong{display:block;font-weight:500;max-width:600px;margin-bottom:19px;line-height:20.8px}
+.tm .stk p{max-width:600px}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:41px 32px;padding-top:0}
+.tg img{width:100%;aspect-ratio:1/1;object-fit:cover;filter:grayscale(1)}
+.tg h4{font-size:20px;line-height:28px;font-weight:500;letter-spacing:-.04em;margin-top:20px}
+.tg span{display:block;font-size:14px;line-height:18.2px;color:var(--g2)}
+.two{background:#fff;padding:0 var(--pad);display:grid;grid-template-columns:1fr 1fr;gap:6px;height:749px}
+.two div{position:relative;overflow:hidden;background:#111}
+.two img{position:absolute;left:0;top:-13%;width:100%;height:126%;object-fit:cover}
+.sp{height:40px;background:#fff}
+
+/* tablet */
+@media (max-width:1199px){
+  .t80{font-size:64px;line-height:72px}
+  .t56{font-size:44px;line-height:52px}
+  .sv-it h3{font-size:44px;line-height:52px}
+  .sv-grid{grid-template-columns:200px 1fr}
+  .jr .hd{margin-left:0}
+  .jc-row{grid-template-columns:repeat(2,1fr)}
+  .ct h2{margin-left:0}
+  .ct .wrap{grid-template-columns:300px 1fr;gap:40px}
+  .pd{grid-template-columns:300px 1fr;gap:40px}
+  .ac{grid-template-columns:300px 1fr}
+  .ah .tt{left:40px}
+  .ah .tt h1{font-size:44px;line-height:52px}
+  .aw-it{grid-template-columns:50% 1fr auto}
+  .aw-it .ex{grid-template-columns:50% 1fr}
+  .tm{grid-template-columns:1fr 1fr;gap:40px}
+  .mx .nb{font-size:48px;line-height:48px}
+  .ft .nl p{font-size:20px;line-height:26px}
+  .ab .txt p{font-size:22px;line-height:29px}
+  .grid3{grid-template-columns:repeat(2,1fr)}
+}
+/* mobile */
+@media (max-width:809px){
+  :root{--pad:20px}
+  .t80{font-size:44px;line-height:48px}
+  .t56{font-size:34px;line-height:38px}
+  .t32{font-size:24px;line-height:30px}
+  .t26{font-size:20px;line-height:26px}
+  #hdr{padding-top:16px}
+  .hero h1{top:auto;bottom:210px}
+  .hero h1 b{font-size:22vw}
+  .hero h1 span{font-size:14vw}
+  .hero .meta{top:auto;right:auto;left:var(--pad);bottom:168px;gap:10px;font-size:11px}
+  .hero .tag{bottom:64px;font-size:14px;width:70%}
+  .hero .go{bottom:64px}
+  .pj{padding:80px var(--pad);min-height:0}
+  .strip{flex-direction:column;gap:28px;align-items:stretch}
+  .pc,.pc.active{aspect-ratio:auto;flex:none}
+  .pc .im{position:relative;aspect-ratio:4/3}
+  .pc img{filter:none}
+  .pc .cap{position:static;opacity:1;transform:none;margin-top:14px}
+  .pc .brk{display:none}
+  .sv{padding:80px var(--pad)}
+  .sv-grid{display:block}
+  .sv-list{margin-top:24px}
+  .sv-it h3{font-size:30px;line-height:36px}
+  .sv-it .th{position:static;width:100%;height:auto;aspect-ratio:4/3;margin-top:16px}
+  .sv-it .bd .in{padding-bottom:12px}
+  .ab{height:auto;min-height:0;padding:96px var(--pad)}
+  .ab .txt{position:static;transform:none;width:auto;max-width:none}
+  .ab .txt p{font-size:20px;line-height:26px}
+  .col{display:none}
+  .jr{padding:80px var(--pad)}
+  .jr .hd{margin-bottom:32px}
+  .jc-row{grid-template-columns:1fr}
+  .jc{min-height:0;gap:36px}
+  .ct{padding:80px var(--pad)}
+  .ct h2{font-size:12vw;line-height:1;margin-left:0}
+  .ct .wrap{display:block}
+  .ct .arrow{display:none}
+  .ct .info{margin:32px 0}
+  .ft{padding:56px var(--pad) 32px}
+  .ft .top{flex-direction:column;gap:40px}
+  .ft .bot{flex-direction:column;margin-top:48px}
+  .ft .nl p{font-size:20px;line-height:26px}
+  .ph{padding-top:120px}
+  .chips{margin-top:40px;flex-wrap:wrap;gap:12px 20px}
+  .grid3{grid-template-columns:1fr}
+  .ph .cnt{top:auto;position:static;margin-top:12px;font-size:20px}
+  .dh h1{font-size:44px;line-height:48px}
+  .pd{display:block;padding:32px var(--pad) 80px}
+  .pd .stk{position:static;margin-top:0}
+  .pd dl{margin:32px 0}
+  .pd .main .blk{padding:24px 0 56px}
+  .mr{padding:0 var(--pad) 80px}
+  .ah{height:600px}
+  .ah .back{top:80px;margin-left:0}
+  .ah .rt{display:none}
+  .ah .tt{left:var(--pad);bottom:48px}
+  .ah .tt .lab{margin-bottom:32px}
+  .ah .tt h1{font-size:32px;line-height:38px;margin-bottom:16px}
+  .ac{display:block;padding:56px var(--pad)}
+  .ac .side{padding:0;margin-bottom:40px}
+  .ac .stk{position:static}
+  .ac .who{margin:0}
+  .cta{width:100%;margin:28px 0 0}
+  .ac .main{margin-left:0}
+  .ac .main h2{font-size:24px;line-height:30px}
+  .ah2{height:auto;padding:120px var(--pad) 0}
+  .ah2 .lab{position:static;transform:none;margin-top:48px;text-align:center}
+  .logos{position:relative;top:auto;margin-top:24px;margin-bottom:56px}
+  .big{height:480px}
+  .aw{padding:80px var(--pad)}
+  .aw-list{margin-top:32px}
+  .aw-it{grid-template-columns:1fr auto;padding-left:0}
+  .aw-it .pj2{grid-column:1;order:3;padding-top:6px}
+  .aw-it .ex{grid-template-columns:1fr}
+  .aw-it .ex p{padding-right:0}
+  .aw-it.open .ex{max-height:260px}
+  .mx{grid-template-columns:1fr 1fr;row-gap:32px}
+  .mx .nb{font-size:44px;line-height:44px}
+  .tm{display:block;padding:80px var(--pad)}
+  .tm .stk{position:static}
+  .tm .stk h2{margin-bottom:32px}
+  .tg{margin-top:48px;gap:32px 12px}
+  .two{grid-template-columns:1fr;height:auto}
+  .two div{height:420px}
+}
+
+</style>
+</head>
+<body>
+<header id="hdr"><a class="logo" href="#home">ORMA</a><button class="mbtn" id="mbtn" aria-label="Menu">Menu<i></i></button></header>
+<div id="menu"><ul><li><a href="#home">Home</a></li><li><a href="#about">Chi siamo</a></li><li><a href="#projects">Progetti</a></li><li><a href="#articles">Articoli</a></li><li><a href="#contact">Contatti</a></li></ul></div>
+<main id="app"></main>
+<script>
+const BRAND="ORMA";
+const I={
+hero:"images/pYEBYDcgGJnub0zFaM9EJQLC7k.png",
+vale:"images/WNlQpRB8d2f1SgqpQOjzVlzDTFg.png",meridian:"images/WFrJbQlXv9XaTZ7LsHRHkmZCbY.png",birch:"images/CjhfXiN6PXAwzajoL7fTNa8Vuc.png",croft:"images/tr77NWRfooGYzvFSUiHBkDZoJo.png",granary:"images/WysWO1cb7kNoRK5UjP1VKU7o10.png",six:"images/aWVd65dbLbCdBq0934GBHI0D4ZY.png",westport:"images/WZwBvdvyc5HSOAmCkdujMmZm4.png",mill:"images/8k4MNs2RKYK1zvjCzFdiSTKnPM.png",
+yk:"images/2Yk1H8lu4szlfwNgVikZePJNLs.png",vh:"images/VHnHvWhoLLo7c2s2gfNd3lQkDBg.png",he:"images/heiti4kilGfA5lpfPJFtmH4wNU.png",xk:"images/XKwPSb0dw53OTxIlCUoBd25Sk.png",mb:"images/MbjVvoX3H3ffz0gbUNAakJCqb7I.png",jm:"images/jMvBazUHvKhX1miCZodgjxnAec.png",l1:"images/l12XWsHZXJHmsjkzHYlPhdPnXQ.png",zm:"images/zmmaXGZ7qkqwsh5kGMxepwdOiE.png",w6:"images/WZ676a3iMhFqvQSjbkHS6gcTU.png",nq:"images/NqICsK20KsnMYL0o1WOAAfH9Qow.png",jk:"images/Jk3mUdQLO3LVpfHJE4CsOsvPZE.png",vy:"images/VY8mklhEwBDnYrwFKTo5BcdTSQ.png",lt:"images/lTciRpRheUcZFuDqMGmNuoR8rkA.png",x7:"images/X7i9YoTKq9ABF39b5G4ivS3kbI.png",om:"images/OMlc76tehQMRCFg9R6fncXUB9Ho.png",hz:"images/7HZlJMgxbaQwCLnnupp0xt8rgP4.png",ve:"images/0ve3RxIvfePwxma93bMpyZ57lbQ.png",ir:"images/irL9bQOttD8YH8ks4uLTflIouuo.png",g4:"images/G48S1jIP57MRVKZ9PSg0p8KoA.png",
+a1:"images/pEnl1jPkdwThUN9yjI8LiUZ0.jpg",a2:"images/5gv9jGZywhNOlUiuExe9kSlDz0.jpg",a3:"images/M22Le8fp9pP5P8wZXcOEyZPBo.png",a4:"images/uI9gyUrcP3BErgRPigV8r7J40OI.jpg",a5:"images/x7qWs8WHX1uFYlLInkTdWOjQhMg.png",a6:"images/AvvBp0DP4F5Y6twjq0b3bRN5hGc.jpg",
+av1:"images/soZrFw6hoHsNFJED4LLBoszdMyE.png",av2:"images/CwRDnaK71gnb49cyGrerAsBcbo.png",av3:"images/wucPXoo0iWVvzx8oaGEFfMa3g.png",
+c1:"images/dR5dZhXAIL72IKtAVWr1N3e05U.png",c2:"images/JjpbEeevPKc7zTEHtwnJqFa2FdQ.png",
+lg1:"images/Wo1avshHOsmlgXizFitfgPgrM.png",lg2:"images/yU3sggUjp3RUPp1Jtj3SxkLqXk.png",lg3:"images/43XC4sMRfmz2QjPEqnLMuzcHn4.png",lg4:"images/fXdTKSpM9JCpN72hwv6KKLXxY.png",lg5:"images/TnIJYQhjl07BIGEEcZm6LDcogY.png",lg6:"images/q6FDS6StJeaEKsDfn13KreosyXs.png",lg7:"images/ne8s8tUK0YngovBk5LUuo10mO8.png",
+big:"images/aBD1aaW6fA4uHk0TZECRMRQl76Q.png",aw1:"images/nlhxAGPY6IsZhL3R1pR8EfKVYw.png",aw2:"images/b7EKA4mPWt1rabfMw9AHZiWHt4.png",aw3:"images/wA9mu8nUEACq5vCEliDiuQBeKrk.png",aw4:"images/IMJlCDx87OM3b4VxL9lg8SA.png",aw5:"images/UIPxrrXDhtPghHqc8nMXchFAR4.png",
+t1:"images/4DB29BY6gtYLHsMPbOxrwG41XXo.png",t2:"images/P8DASE8WHfqwe49G21wdluxo.png",t3:"images/DUlqQr9b6K2KG83uYWEcRJKNl78.png",t4:"images/XSFIhCUajdmMf4NfwFfLtMycE.png",t5:"images/T7EA4njoYYTsqhREOyloynSg.jpeg",t6:"images/XRdKBUMTce8MwJT3pcdU3wKc.png",
+w1:"images/Z6pWrbKrPxE2ZTHG3LQZmQYeTo.png"
+};
+
+const PROJECTS=[
+{slug:"casa-nella-valle",name:"Casa nella Valle",year:"2024",loc:"Bergamo, BG",size:"223 m²",cats:["res","ren"],thumb:I.vale,
+ desc:"Ristrutturazione completa di una casa per una famiglia in periferia, all'insegna dei materiali naturali.",
+ homeDesc:"Ristrutturazione completa di una casa per una famiglia in periferia, all'insegna dei materiali naturali.",
+ g1:[I.birch,I.w6,I.nq],g2:[I.birch,I.jk,I.zm],
+ b1:["Il brief","I clienti ci hanno contattato con una visione chiara: dare nuova vita alla loro casa di periferia degli anni Novanta senza perderne il calore. Ogni stanza doveva lavorare di più per una famiglia in crescita, restando accogliente e senza fretta. Abbiamo riportato l'interno al guscio e ricostruito la distribuzione intorno al modo in cui la famiglia vive davvero: le mattine, i compiti, la cucina del fine settimana.","Il piano terra è stato aperto per creare un'unica zona giorno continua, ancorata a un'isola centrale in pietra calcarea levigata. La luce è diventata il principio guida, con nuovi lucernari sopra il vano scale per portare in profondità il sole del pomeriggio."],
+ b2:["Materiali e finiture","Abbiamo scelto una tavolozza di materiali naturali e tattili, capaci di invecchiare bene: pavimenti in rovere bianco, tappezzerie in lino e pareti intonacate a mano in un bianco caldo. I dettagli sono stati mantenuti semplici e opachi, lasciando che siano le texture a sostenere le stanze più della decorazione.","Una falegnameria su misura corre lungo tutto il corridoio di servizio e nasconde le esigenze pratiche della vita familiare dietro ante pulite e a filo. Ogni finitura è stata campionata in loco in diversi momenti della giornata prima dell'approvazione, così che la tavolozza regga sia al sole luminoso del Texas sia alla luce calda della sera."]},
+{slug:"meridiana",name:"Meridiana",year:"2023",loc:"Milano, MI",size:"353 m²",cats:["com"],thumb:I.meridian,
+ desc:"Uno spazio di coworking boutique pensato per essere caldo e residenziale, non aziendale.",
+ g1:[I.vy,I.lt,I.x7],g2:[I.om,I.vy,I.lt],
+ b1:["Il concept","Meridiana è stato commissionato da un gruppo alberghiero che voleva creare uno spazio di lavoro riservato ai soci, simile a una casa ben progettata più che a un ufficio. Il brief chiedeva uno spazio capace di sostenere il lavoro individuale concentrato al mattino e gli incontri informali con i clienti nel pomeriggio, tutto dentro un unico interno coerente.","Abbiamo organizzato la pianta in una serie di zone distinte: una sala silenziosa in stile biblioteca, un tavolo comune sotto una griglia di lampade a sospensione e una serie di postazioni semichiuse rivestite in velluto verde scuro. La reception è stata trattata come un salotto, con un divano curvo e un camino ad accogliere chi arriva."],
+ b2:["Arredi e illuminazione","Tutti gli arredi provengono da artigiani americani indipendenti, con una preferenza per strutture in legno massello e rivestimenti naturali. Abbiamo evitato tutto ciò che somigliasse ad attrezzatura da ufficio: le sedie operative sono state sostituite da sedute da pranzo e ogni scrivania è rivestita in pelle anziché in laminato.","L'illuminazione è stata distribuita su tre circuiti per far cambiare l'atmosfera dello spazio nel corso della giornata. Le applique offrono una base ambientale costante, mentre le sospensioni regolabili sopra i piani di lavoro danno ai soci il controllo sul proprio ambiente immediato. Il risultato è uno spazio che i soci descrivono con costanza come un posto dove vogliono davvero passare il tempo."]},
+{slug:"via-delle-betulle",name:"Via delle Betulle",year:"2024",loc:"Torino, TO",size:"297 m²",cats:["res","new"],thumb:I.birch,
+ desc:"Una casa di nuova costruzione in cui ogni spazio interno è stato progettato da zero.",
+ g1:[I.vh,I.hz,I.westport],g2:[I.l1,I.he,I.vh],
+ b1:["Collaborare fin dalle fondamenta","Via delle Betulle ci ha dato la rara occasione di lavorare a fianco degli architetti fin dall'inizio del cantiere, prima ancora che venisse eretta una sola parete. Questa collaborazione anticipata ci ha permesso di influire su decisioni che di solito sono già fissate quando arriva l'interior designer: aperture strutturali, altezze dei soffitti, posizione delle finestre e percorso degli impianti.","La famiglia aveva un'idea molto precisa: una casa legata alla foresta di abeti di Douglas che la circonda e al tempo stesso pratica per due bambini piccoli. Abbiamo risposto con una tavolozza che nasce dal paesaggio: pietra chiara, legno grezzo e una gamma tenue di verdi presi direttamente dal bosco fuori."],
+ b2:["Falegnameria e dettagli","Tutta la falegnameria è stata progettata internamente e realizzata da un laboratorio locale di Torino. La cucina occupa un'intera parete del piano terra open space, laccata in verde salvia con maniglie in ottone non verniciato che si patineranno nel tempo. Una panca-finestra nell'angolo lettura funge anche da contenitore, con cuscini rivestiti in lana a quadri resistente.","Al piano di sopra ogni camera è stata trattata come uno spazio distinto e non come una formula ripetuta. Le camere dei bambini hanno letti a muro con scaffalature integrate, mentre la suite principale si apre con porte a vetri su una terrazza privata incorniciata da betulle: il dettaglio che ha dato il nome al progetto."]},
+{slug:"casa-del-podere",name:"Casa del Podere",year:"2023",loc:"Bologna, BO",size:"72 m²",cats:["res","ren"],thumb:I.croft,
+ desc:"Un appartamento di città pieno di luce trasformato in un rifugio calmo e curato.",
+ g1:[I.birch,I.jk,I.yk],g2:[I.nq,I.zm,I.ve],
+ b1:["Lavorare con i vincoli","Con 72 metri quadrati, Casa del Podere richiedeva di ragionare con attenzione su ciò che lo spazio doveva fare rispetto a ciò che doveva far sentire. La cliente, una professionista che lavora da casa tre giorni a settimana, aveva bisogno che l'appartamento funzionasse da ufficio, da salotto e da luogo in cui staccare, senza che queste funzioni si mescolassero.","Abbiamo ridisegnato completamente la pianta, eliminando un tramezzo per unire cucina e zona giorno e usando un mobile su misura per definire l'area di lavoro senza chiuderla. Il mobile ospita una scrivania ribaltabile, scaffali nascosti e un armadio sottile sul retro, così che la cliente possa chiudere la giornata dietro porte vere a fine pomeriggio."],
+ b2:["Luce e contenitori","L'appartamento è esposto a nord, quindi massimizzare la sensazione di luce è stato un tema centrale. Abbiamo mantenuto una tavolozza chiarissima — pareti bianche, pavimenti in frassino e tende di lino che si posano morbide a terra — e inserito un grande specchio di fronte alla finestra principale per spingere la luce più a fondo nella pianta.","Lo spazio contenitore è stato trattato come un elemento architettonico e non come un ripensamento. Armadiature a tutta altezza rivestono il corridoio, offrendo ampia capacità senza interrompere le zone giorno. Il risultato è una casa che sembra grande il doppio: ordinata, silenziosa e del tutto a proprio agio."]},
+{slug:"il-granaio",name:"Il Granaio",year:"2022",loc:"Verona, VR",size:"474 m²",cats:["com","ren"],thumb:I.granary,
+ desc:"Un magazzino convertito, reinventato come studio creativo e spazio eventi per uno studio di design.",
+ g1:[I.jk,I.hz,I.he],g2:[I.ve,I.om,I.jk],
+ b1:["Trasformare il guscio","Il Granaio era un magazzino grezzo degli anni Quaranta nel quartiere di Veronetta, a Verona: pavimenti in cemento, capriate in acciaio a vista e un tetto che aveva visto decenni migliori. Il cliente, uno studio di design e branding in crescita, aveva bisogno di uno spazio che fosse la sua sede stabile e allo stesso tempo ospitasse presentazioni ai clienti, lanci di prodotto ed eventi per la comunità.","Invece di ammorbidire il carattere industriale dell'edificio, lo abbiamo assecondato. Le capriate originali sono state sabbiate e lasciate a vista, il pavimento in cemento levigato e sigillato, i muri perimetrali in mattoni stuccati e lasciati nudi. Su questo sfondo onesto abbiamo inserito elementi caldi e curati: scaffalature su misura in rovere, un lungo bancone cucina in acciaio brunito e uno schema di illuminazione che porta la stanza dalla luce di lavoro del giorno alla calda atmosfera serale."],
+ b2:["Bilanciare lavoro e ritrovo","La pianta è organizzata intorno a una spina centrale che separa lo studio open space dalla zona eventi e presentazioni. Una parete scorrevole a tutta altezza, realizzata in abete di Douglas di recupero, permette di unire le due aree per i grandi eventi o di separarle del tutto per il lavoro di studio. Il sistema non richiede alcuna guida a soffitto, preservando la scenografia delle capriate a vista.","Pannelli acustici sono stati integrati con discrezione nel sistema di pareti, così lo spazio resta funzionale anche a volume alto senza perdere la sua crudezza visiva. Il risultato è un luogo di lavoro che il team dello studio descrive come il primo in cui non abbia mai voluto andare via a fine giornata."]},
+{slug:"studio-sei",name:"Studio Sei",year:"2023",loc:"Roma, RM",size:"204 m²",cats:["com"],thumb:I.six,
+ desc:"Uno studio fotografico e showroom progettato per fare anche da spazio eventi flessibile per un'agenzia creativa.",
+ g1:[I.w6,I.nq,I.he],g2:[I.westport,I.zm,I.croft],
+ b1:["Uno spazio che lavora due volte","Studio Sei occupa il piano terra di un magazzino convertito nel quartiere Ostiense, preso da un'agenzia creativa che aveva bisogno di un ambiente di scatto professionale di giorno e di uno spazio eventi per i clienti la sera. Il brief era preciso: ogni scelta progettuale doveva servire entrambi gli usi senza compromessi, e il passaggio da una modalità all'altra doveva essere realizzabile da due persone in meno di un'ora.","Lo abbiamo risolto con un sistema di binari che corre per tutta la lunghezza del soffitto, permettendo a grandi pannelli di tessuto di dividere o aprire lo spazio in pochi minuti. L'area di scatto è ancorata da un ciclorama bianco continuo a un'estremità e da un banco cucina funzionale all'altra: entrambi sembrano elementi di design voluti e non ripieghi pratici quando lo spazio è configurato per gli eventi."],
+ b2:["Finiture e flessibilità","Ogni superficie è stata scelta per come fotografa tanto quanto per come si vive. I pavimenti sono in cemento colato caldo, le pareti di un bianco vero che restituisce i colori con precisione sia con luce al tungsteno sia con luce bilanciata luce-giorno. Una lunga credenza su misura lungo la parete est offre spazio per le attrezzature e fa da buffet durante gli eventi serali.","Le finestre esistenti del magazzino sono state mantenute e dotate di tende oscuranti motorizzate, dando al team pieno controllo sulla luce naturale senza sacrificare il carattere grezzo dell'edificio. È uno spazio costruito attorno alla performance, e risponde a entrambi i suoi ruoli senza mai sembrare un compromesso."]},
+{slug:"porto-ponente",name:"Porto Ponente",year:"2022",loc:"Camogli, GE",size:"153 m²",cats:["res","ren"],thumb:I.westport,
+ desc:"Un cottage sulla spiaggia ridisegnato come casa familiare per tutto l'anno, tra vita costiera informale e dettagli raffinati.",
+ g1:[I.he,I.zm,I.ir],g2:[I.ir,I.zm,I.he],
+ b1:["Il brief","Porto Ponente era nato come rifugio stagionale: un piccolo cottage sulla spiaggia usato per pochi mesi l'anno, arredato con ciò che era comodo e sacrificabile. I clienti, una famiglia di quattro persone, hanno deciso di farne la casa stabile e ci hanno chiesto di trasformarlo di conseguenza senza intaccare il carattere sereno che li aveva fatti innamorare.","La sfida era rendere la casa completa e curata senza perderne la leggerezza. Abbiamo riorganizzato l'interno per dare priorità alla vista: la zona giorno è stata spostata verso il fronte sull'oceano e l'ingombro delle stanze secondarie è stato ridotto per lasciare respiro agli spazi principali."],
+ b2:["Palette e texture","La palette dei materiali è nata interamente dal paesaggio circostante: lino sbiancato, legno calcinato e ceramica opaca nei toni della sabbia e della nebbia. Abbiamo evitato di proposito tutto ciò che sapesse di nautico o tematico, preferendo un calore discreto che funziona in ogni stagione e con ogni luce.","I materiali esterni e interni sono rimasti coerenti oltre la soglia: la stessa pietra usata in terrazza prosegue in cucina, creando l'impressione che la casa si estenda naturalmente nel giardino. Il risultato è meno un cottage ristrutturato e più una casa che è sempre stata destinata a essere esattamente così."]},
+{slug:"il-mulino",name:"Il Mulino",year:"2022",loc:"Biella, BI",size:"409 m²",cats:["com","ren"],thumb:I.mill,
+ desc:"Un cotonificio ottocentesco convertito nella hall di un boutique hotel e negli spazi comuni per gli ospiti.",
+ g1:[I.g4,I.yk,I.ir],g2:[I.yk,I.ir,I.g4],
+ b1:["Rispettare l'originale","Il Mulino è una di quelle rare commissioni in cui l'edificio stesso era il brief. Un cotonificio della metà dell'Ottocento in Valle Cervo, a Biella, passato attraverso diversi proprietari e usi prima di essere acquistato da un gruppo alberghiero con una visione precisa: un piccolo hotel serio per viaggiatori attenti al design, che volevano carattere più che comfort da formula.","Il nostro compito era progettare la hall, il bar, la biblioteca e la sala colazioni: gli spazi comuni rivolti agli ospiti che avrebbero dato il tono a tutta la struttura. Abbiamo cominciato facendo il meno possibile, togliendo decenni di ristrutturazioni accumulate per rivelare le ossa originali del mulino: pesanti pilastri in legno, colonne in ghisa, pavimenti a tavole larghe e pareti in mattoni che portavano ancora i segni dei telai che vi erano appoggiati."],
+ b2:["Sovrapporre il nuovo al vecchio","Sul tessuto storico a vista abbiamo introdotto uno strato curato di arredi e illuminazione contemporanei: pezzi con abbastanza peso visivo da reggere negli spazi dai soffitti alti senza competere con l'architettura. Il bancone del bar è in marmo massello, gli scaffali della biblioteca in acciaio brunito e le sedute del lounge sono rivestite in mohair ocra intenso che dialoga con il mattone rosso.","Lampade a sospensione su misura — nate da una collaborazione con un soffiatore di vetro di Murano — pendono a grappoli sopra la hall principale, diffondendo una luce calda e mutevole che cambia con l'ora del giorno. Il risultato è uno spazio che gli ospiti descrivono come insieme molto antico e molto presente, ed era esattamente l'ambizione fin dalla prima conversazione con il cliente."]}
+];
+const HOME_PROJECTS=["casa-nella-valle","meridiana","via-delle-betulle","casa-del-podere","il-granaio","studio-sei"];
+const INDEX_PROJECTS=["casa-nella-valle","meridiana","via-delle-betulle","casa-del-podere","il-granaio","porto-ponente"];
+const PCATS=[["all","Tutti"],["res","Residenziale"],["com","Commerciale"],["new","Nuova costruzione"],["ren","Ristrutturazione"]];
+
+const SERVICES=[
+{t:"Progettazione residenziale",d:"Orma lavora a stretto contatto con i proprietari di casa per sviluppare una visione coerente, occupandosi di tutto: dalla pianificazione degli spazi alla scelta dei materiali, dall'acquisto degli arredi all'installazione finale.",p:"€4.500",i:I.birch},
+{t:"Interni commerciali",d:"Spazi di lavoro e di vendita progettati per funzione, flusso e coerenza con il brand. Orma traduce l'identità di un'azienda in un ambiente fisico.",p:"€9.000",i:I.granary},
+{t:"Consulenza per ristrutturazioni",d:"Una guida mirata su layout, materiali e finiture prima dell'inizio dei lavori. Ideale per i clienti che vogliono un parere esperto fin dall'inizio, aiuta a evitare errori costosi.",p:"€600",i:I.xk},
+{t:"Selezione FF&E",d:"Selezione curata di arredi, complementi e attrezzature su misura per il brief del progetto. Orma si occupa di ricerca, acquisti e coordinamento, così i clienti ricevono pezzi coerenti e ben pensati.",p:"€1.800",i:I.meridian}
+];
+const COL_L=[I.birch,I.yk,I.vh,I.he,I.six];
+const COL_R=[I.mb,I.jm,I.l1,I.xk,I.zm];
+
+const ARTICLES=[
+{slug:"why-we-draw-the-daylight-before-the-plan",title:"Perché disegniamo la luce del giorno prima della pianta.",tw:["Perché","disegniamo","la luce","del giorno","prima","della pianta."],cat:"Pratica di studio",date:"18 set 2026",read:"6 min di lettura",thumb:I.a1,av:I.av1,author:"Mara Cattaneo",role:"Designer principale",
+ ex:"Facciamo lo studio della luce naturale prima della prima pianta, perché le ore di una stanza ne decidono la funzione.",
+ s:[["Cominciamo dal sole.","Ogni progetto dello studio si apre con uno studio della luce naturale, disegnato prima di qualsiasi pianta. Registriamo il percorso del sole sul sito in quattro date dell'anno e segniamo le ore di luce che ogni stanza può aspettarsi. Lo studio richiede una settimana e risolve questioni che altrimenti verrebbero discusse per mesi.","Il metodo nasce da un appartamento a Lisbona del 2019, dove il cliente voleva la cucina sul lato strada. Lo studio mostrò che quel fronte riceveva luce diretta per meno di due ore in inverno. Abbiamo spostato la cucina sul cortile e riservato il lato strada allo studio, che aveva bisogno di luce uniforme più che di calore."],
+ ["Le stanze seguono le loro ore.","Una volta mappate le ore, il programma viene da sé. Una stanza che prende la luce del mattino diventa una cucina o un luogo dove leggere. Una stanza che trattiene la luce del tardo pomeriggio diventa un posto dove sedersi dopo il lavoro. Le stanze con poca luce diventano ripostigli, corridoi o bagni, dove l'abbagliamento sarebbe comunque un fastidio.","Questo rovescia l'ordine abituale, in cui la pianta è fissata e la luce viene corretta dopo con i corpi illuminanti. Correggere con le lampade costa caro e non funziona mai del tutto. Una finestra a sud non è una lampada."],
+ ["Cosa lo studio non può dire.","Lo studio non dice nulla su vista, rumore o vicini, e li valutiamo tutti e tre a parte. In una casa del 2024 a Porto, il fronte meglio illuminato dava su una strada di servizio, così abbiamo accettato una stanza più fioca e preso luce in prestito da una finestra a nastro in alto.","Il punto non è che la luce vinca ogni discussione. Il punto è che entri nella discussione per prima, quando la pianta è ancora economica da cambiare."]]},
+{slug:"the-case-for-lime-plaster-in-coastal-houses",title:"Perché l'intonaco a calce nelle case sul mare.",tw:["Perché","l'intonaco","a calce","nelle case","sul mare."],cat:"Materiali",date:"7 ago 2026",read:"5 min di lettura",thumb:I.a2,av:I.av2,author:"Giovanni Riva",role:"Responsabile materiali",
+ ex:"L'intonaco a calce costa di più da applicare e meno da mantenere, e cambia il modo in cui una parete incontra la luce.",
+ s:[["Perché lo specifichiamo.","L'intonaco a calce è nel nostro capitolato standard dal 2021. Si applica in tre mani nell'arco di quattro giorni, più a lungo del cartongesso con rasatura, e costa circa il quaranta per cento in più al primo passaggio. Il motivo per sceglierlo sta in ciò che accade nel decennio successivo.","La calce assorbe e rilascia l'umidità invece di trattenerla. Nelle case in pietra su cui lavoriamo lungo la costa, questa sola proprietà elimina la maggior parte dei problemi di umidità creati dalle finiture sintetiche."],
+ ["Come si legge in una stanza.","Una parete a calce è leggermente irregolare, e l'irregolarità è il punto. La luce la sfiora e rivela la traccia della cazzuola, così una parete piana porta una texture appena percepibile per tutta la giornata invece di restare spenta. Le fotografie la appiattiscono quasi del tutto, ed è per questo che chiediamo ai clienti di visitare una parete finita prima di decidere.","Il colore sta dentro il materiale, mescolato con il pigmento e non steso sopra. Un graffio mette a nudo altro dello stesso colore invece di un fondo bianco, così la parete invecchia senza bisogno di ritocchi."],
+ ["Dove è la scelta sbagliata.","La calce è alcalina e lenta a maturare, e non va dietro una doccia né su una superficie che verrà lavata ogni giorno. Lì usiamo piastrelle o pietra e teniamo la calce per le stanze asciutte.","Serve anche un intonacatore che l'abbia già fatto. In un progetto del 2022 abbiamo perso due settimane per una squadra che imparava in cantiere, e la finitura ha dovuto comunque essere rifatta."]]},
+{slug:"how-we-scope-a-project-in-four-weeks",title:"Come definiamo un progetto in quattro settimane.",tw:["Come","definiamo","un progetto","in quattro","settimane."],cat:"Pratica di studio",date:"14 apr 2026",read:"5 min di lettura",thumb:I.a3,av:I.av3,author:"Noemi Conti",role:"Responsabile di progetto",
+ ex:"Una fase iniziale fissa di quattro settimane, con un compenso a parte, così entrambe le parti possono tirarsi indietro prima della fase costosa.",
+ s:[["La fase iniziale.","Ogni incarico parte dalle stesse quattro settimane, con un compenso proprio e non incluso nell'onorario del progetto. Comprende un rilievo, lo studio della luce naturale, un programma scritto insieme al cliente e tre opzioni di pianta in scala 1:100.","Al termine delle quattro settimane ciascuna delle parti può fermarsi, e il cliente tiene i disegni. Dal 2020 abbiamo concluso cinque incarichi in questo modo, e in ogni caso il motivo è emerso alla seconda settimana e non all'ottavo mese."],
+ ["Cosa chiediamo.","Ci servono una cifra di budget, una data che conta e il nome di chi decide. I progetti privi di tutti e tre tendono a produrre disegni che piacciono a tutti in sala e a nessuno dopo.","Chiediamo anche fotografie di stanze che al cliente piacciono, comprese quelle che non sa spiegare. Sono più utili di un elenco di stili, perché tendono ad avere in comune una qualità della luce più che un aspetto."],
+ ["Dopo le quattro settimane.","L'onorario completo viene fissato una volta definito il programma, come percentuale del costo di costruzione con un minimo. Il minimo lo pubblichiamo: nel 2026 è di 18.000 euro, così un piccolo progetto non viene quotato fino al silenzio.","Da lì le fasi sono quelle convenzionali: sviluppo del progetto, disegni esecutivi, gara e cantiere. La differenza è che il brief che arriva allo sviluppo del progetto è già stato messo alla prova."]]},
+{slug:"la-casa-del-porto-ridotta-alla-sua-struttura",title:"La Casa del Porto, ridotta alla sua struttura.",tw:["La","Casa","del","Porto,","ridotta","alla sua","struttura."],cat:"Processo",date:"11 giu 2026",read:"8 min di lettura",thumb:I.a4,av:I.av1,author:"Mara Cattaneo",role:"Designer principale",
+ ex:"Un magazzino degli anni Trenta sul lungomare di Setúbal, ridotto alla sua struttura e ricostruito come un'unica lunga stanza.",
+ s:[["Cosa abbiamo trovato.","L'edificio fu costruito nel 1934 come deposito del sale, e nel 2023, quando lo vedemmo, era stato diviso in undici stanze. Dietro i tramezzi c'era una struttura in cemento in buone condizioni, lunga nove campate, con un'altezza libera di quattro metri e mezzo.","Quasi tutto il nostro lavoro è stato di rimozione. Abbiamo tolto ogni parete interna, due piani aggiunti e un'estensione sul retro, restituendo un unico volume di 240 metri quadrati con luce dai due lati lunghi."],
+ ["Una stanza, quattro soglie.","Invece di ricostruire le stanze, abbiamo collocato quattro volumi isolati lungo la parete nord: un nucleo cucina, un bagno, due camere e una scala per il tetto. Nessuno tocca il soffitto, così la struttura originale si legge in continuità sopra la testa.","Gli spazi tra i volumi svolgono il lavoro che di solito fanno i corridoi. Ognuno è abbastanza largo da starci in piedi e da ospitare una porta, una panca o una libreria, e danno alla lunga stanza un ritmo a intervalli di circa sei metri."],
+ ["Materiali e costi.","La struttura è stata lasciata com'era, lavata e sigillata. Il nuovo è in intonaco di calce, rovere e acciaio brunito, tenuto a tre materiali perché i volumi si leggano come oggetti collocati dentro un edificio più antico.","Il progetto è stato consegnato in quattordici mesi a 1.850 euro al metro quadrato, sotto il budget fissato nel 2023. Il risparmio è venuto quasi tutto dalla demolizione, perché la struttura non ha richiesto alcun intervento strutturale."],
+ ["Viverci dentro.","I proprietari si sono trasferiti nella primavera del 2025 e da allora hanno segnalato un problema e una sorpresa. Il problema è acustico: una sola lunga stanza porta il suono, e nel primo mese hanno aggiunto un tappeto e due tende.","La sorpresa è il tetto. Abbiamo trattato la scala come semplice circolazione, ed è diventata la stanza che la famiglia usa di più tra maggio e settembre."]]},
+{slug:"two-weeks-of-pencil-before-the-first-file",title:"Due settimane di matita prima del primo file.",tw:["Due","settimane","di matita","prima","del primo","file."],cat:"Processo",date:"2 lug 2026",read:"4 min di lettura",thumb:I.a5,av:I.av3,author:"Noemi Conti",role:"Responsabile di progetto",
+ ex:"I primi cinquanta disegni di ogni progetto si fanno a matita, a una scrivania, prima di aprire un file.",
+ s:[["Prima la matita, per due settimane.","Ogni progetto comincia con un quaderno e una regola fissa: niente disegni al computer per le prime due settimane. Alla fine di quel periodo abbiamo di solito tra quaranta e sessanta piante e sezioni, la maggior parte sbagliate, tutte veloci.","La regola esiste perché il modello premia troppo presto la risoluzione. Un muro disegnato in un programma di modellazione ha spessore, materiale e costo, e una volta che li ha è difficile buttarlo. Un muro a matita è una linea."],
+ ["La scala sulla pagina.","Disegniamo le piante in scala 1:100 e i dettagli in 1:5, a mano, su carta da lucido sovrapposta all'ultima versione. Lavorare a strati significa che la storia dell'idea resta visibile, così un'opzione abbandonata il martedì si può recuperare il venerdì senza ridisegnarla.","Le quote vanno sul disegno fin dal primo foglio. Uno schizzo senza numeri è un'atmosfera, e un'atmosfera non si può verificare rispetto all'alzata di una scala o all'apertura di una porta."],
+ ["Quando si apre il file.","Il modello comincia quando la pianta ha smesso di muoversi e da quel momento è una registrazione e non uno strumento per pensare. Disegni esecutivi, computi e coordinamento vivono lì, e restano accurati perché le discussioni sono state chiuse su carta.","I clienti ricevono entrambi. I disegni spiegano l'intenzione e il modello spiega l'edificio."]]},
+{slug:"four-oak-floors-thirty-years-later",title:"Quattro pavimenti in rovere, trent'anni dopo.",tw:["Quattro","pavimenti","in rovere,","trent'anni","dopo."],cat:"Materiali",date:"20 mag 2026",read:"6 min di lettura",thumb:I.a6,av:I.av2,author:"Giovanni Riva",role:"Responsabile materiali",
+ ex:"Siamo tornati su quattro pavimenti posati tra il 1996 e il 2004 per vedere cosa avessero fatto l'olio, il passaggio e la luce.",
+ s:[["Quattro pavimenti, quattro condizioni.","Nel 2025 siamo tornati su quattro pavimenti in rovere specificati dallo studio tra il 1996 e il 2004: due appartamenti, una libreria e una casa di famiglia. Tutti e quattro erano in tavole massicce da venti millimetri, oliate e non verniciate, e tutti e quattro sono ancora in servizio.","La variabile che non avevamo considerato era il passaggio. Il pavimento della libreria si è consumato fino al legno nudo lungo una linea di tre metri, mentre gli appartamenti mostrano quasi nessuna usura fuori dalle cucine."],
+ ["Cosa ha fatto l'olio.","Il rovere oliato scurisce, e scurisce in modo irregolare. Le tavole sotto una finestra a sud nella casa di famiglia sono due toni più chiare di quelle sotto il divano, cosa che i proprietari si aspettavano al contrario. Il sole diretto sbianca più in fretta di quanto ambri.","La manutenzione è stata modesta. Tre dei quattro sono stati rioliati una volta, tra gli undici e i diciotto anni, e la libreria è stata rifatta quattro volte."],
+ ["Cosa abbiamo cambiato.","Oggi specifichiamo una tavola da ventidue millimetri anziché venti, che regala una levigatura in più nella vita del pavimento. Nei lavori commerciali posiamo le tavole attraverso la linea principale di passaggio, in modo che l'usura si distribuisca su più giunti.","Abbiamo mantenuto l'olio. Un pavimento verniciato cede tutto in una volta e va scrostato, mentre uno oliato cede lentamente e in un punto solo, cosa con cui un proprietario può convivere e che può riparare."]]}
+];
+const ACATS=[["all","Tutti"],["Pratica di studio","Pratica di studio"],["Materiali","Materiali"],["Processo","Processo"]];
+
+const TEAM=[
+["Elena Orsini","Fondatrice e direttrice creativa",I.t1],["Matteo Ferraris","Interior designer senior",I.t2],
+["Giulia Marchetti","Project manager",I.t3],["Sara Colombo","Specialista FF&E",I.t4],
+["Chiara Valenti","Designer junior",I.t5],["Sofia Parodi","Brand e comunicazione",I.t6]];
+const AWARDS=[
+["Premio Interni Italia","La Cala","2023","Riconosciuto nella categoria residenziale per l'uso eccezionale di materiali naturali e per la pianificazione degli spazi di ispirazione costiera.",I.aw1],
+["Milano Design Prize","Sede Verdana","2022","Selezionato tra i finalisti per il miglior interno commerciale, apprezzato per l'equilibrio tra design biofilico e spazi di lavoro flessibili.",I.aw2],
+["Premio Casa Design","Casa degli Ontani","2021","Vincitore come migliore ristrutturazione residenziale per una trasformazione completa basata sull'open space e sulla matericità tattile.",I.aw3],
+["Premio Ospitalità Italia","Studio Notte","2023","Premiato nella categoria ospitalità ed esperienza per un allestimento scuro e dal forte contrasto che ha ridefinito l'ambiente dello studio.",I.aw4],
+["Premio Architettura d'Interni","La Cala","2022","Vincitore nella categoria interni residenziali per l'approccio raffinato al design di una casa vacanza e alla cura di FF&E.",I.aw5]];
+const METRICS=[["Progetti completati",60,200,"+"],["Premi di settore",5,18,"+"],["Anni di esperienza",10,20,"+"],["Clienti che tornano",55,78,"%"]];
+const LOGOS=[I.lg1,I.lg2,I.lg3,I.lg4,I.lg5,I.lg6,I.lg7];
+
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const P=slug=>PROJECTS.find(p=>p.slug===slug);
+const A=slug=>ARTICLES.find(a=>a.slug===slug);
+const ARROW='<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 1v10M2 7l4 4 4-4"/></svg>';
+
+/* ---------- componenti ---------- */
+const footer=(dark)=>`
+<footer class="ft${dark?' dark':''}">
+ <div class="top">
+  <div class="nl"><p>Un design che dura oltre le mode.<br>Iscriviti oggi alla nostra newsletter.</p>
+   <form data-nl><input type="email" placeholder="nome@email.it" aria-label="Email"><button>Iscriviti</button></form><small></small></div>
+ </div>
+ <div class="bot lab"><div class="so"><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a><a href="https://youtube.com" target="_blank" rel="noopener">Youtube</a><a href="https://linkedin.com" target="_blank" rel="noopener">Linkedin</a></div>
+  <div class="cr">© 2026 Orma Studio. Tutti i diritti riservati.</div></div>
+</footer>`;
+
+const contact=()=>`
+<section class="ct" id="contact">
+ <h2 class="t80 rv">Lavoriamo insieme.</h2>
+ <div class="wrap">
+  <div><div class="arrow">↳</div>
+   <div class="info rv">
+    <div class="box"><span class="lab">Email</span><a href="mailto:info@orma.studio">info@orma.studio</a></div>
+    <img src="${I.c1}" alt="">
+    <div class="box"><span class="lab">Telefono</span><a href="tel:+393896038940">389 603 89 40</a></div>
+    <img src="${I.c2}" alt="">
+   </div></div>
+  <form data-ct class="rv d1">
+   <div class="fld"><label>Nome</label><input type="text" placeholder="Mario Rossi"></div>
+   <div class="fld"><label>Email</label><input type="email" placeholder="mario@esempio.it"></div>
+   <div class="fld"><label>Argomento</label><select><option>Seleziona…</option><option>Servizio</option><option>Assistenza</option></select></div>
+   <div class="fld"><label>Messaggio</label><textarea placeholder="Scrivi il tuo messaggio"></textarea></div>
+   <button class="btn" type="submit">Invia</button><div class="fnote"></div>
+  </form>
+ </div>
+</section>`;
+
+const pcard=(p)=>`<a class="pcard rv" href="#project-${p.slug}" data-cats="${p.cats.join(' ')}"><div class="im"><img src="${p.thumb}" alt="${p.name}" loading="lazy"><span class="vm">Scopri di più</span></div><h3>${p.name}</h3><div class="mt lab"><span>${p.year}</span><span>${p.loc}</span></div></a>`;
+const acard=(a)=>`<a class="acard rv" href="#article-${a.slug}" data-cat="${a.cat}"><div class="im"><img src="${a.thumb}" alt="" loading="lazy"><div class="gr"></div><div class="mt lab"><span>${a.cat}</span><span>${a.date}</span></div><div class="ex">${a.ex}</div></div><h3>${a.title}</h3></a>`;
+
+/* ---------- pagine ---------- */
+function home(){
+ const strip=HOME_PROJECTS.map((s,i)=>{const p=P(s);return `<a class="pc${i==2?' active':''}" href="#project-${p.slug}" data-i="${i}"><div class="im"><img src="${p.thumb}" alt="${p.name}"></div><i class="brk tr"></i><i class="brk bl"></i><div class="cap"><h3>${p.name}</h3><p>${p.desc}</p></div></a>`}).join('');
+ const sv=SERVICES.map((s,i)=>`<div class="sv-it${i==0?' open':''}"><div class="hd"><h3>${s.t}</h3><span class="pl"></span></div><div class="bd"><div><div class="in"><p class="body">${s.d}</p><div class="fr"><span class="lab">Da</span><span class="t24">${s.p}</span></div><img class="th" src="${s.i}" alt=""></div></div></div></div>`).join('');
+ const col=a=>[...a,...a].map(x=>`<img src="${x}" alt="">`).join('');
+ const jr=['casa-nella-valle','meridiana','via-delle-betulle','casa-del-podere'];
+ const jcards=ARTICLES.slice(0,4).map(a=>`<a class="jc rv" href="#article-${a.slug}"><div class="im"><img src="${a.thumb}" alt=""><i class="brk tr"></i><i class="brk bl"></i></div><div class="tx"><h3>${a.title}</h3><div class="au lab"><i></i>${a.author}</div></div></a>`).join('');
+ return `
+<div class="hero"><img src="${I.hero}" alt="Interno minimale"><div class="in">
+ <h1><b>${BRAND}</b><span>STUDIO.</span></h1>
+ <div class="meta lab"><span>Con sede a Milano</span><span class="s">//</span><span>Dal 2008</span></div>
+ <p class="tag">${BRAND[0]+BRAND.slice(1).toLowerCase()} progetta spazi personali, senza tempo e pensati per le persone che li abitano.</p>
+ <a class="go lab" href="#" data-scroll="pj">Vedi i progetti ${ARROW}</a></div></div>
+<div id="home-body">
+ <section class="pj" id="pj"><div class="strip">${strip}</div></section>
+ <section class="sv"><div class="sv-grid"><div></div><div><div class="lab mut rv">Servizi</div><div class="sv-list rv">${sv}</div></div></div></section>
+ <section class="ab"><div class="col l"><div class="tr">${col(COL_L)}</div></div><div class="col r"><div class="tr">${col(COL_R)}</div></div>
+  <div class="txt"><div class="lab rv">Chi siamo</div><p class="rv">Orma Studio è uno studio di interior design a servizio completo, nato dalla convinzione che i grandi spazi inizino dal saper ascoltare.</p><p class="rv d1">Un processo rigoroso, una profonda conoscenza dei materiali e un occhio attento a luce e proporzioni danno vita a interni che sembrano pensati e destinati a durare.</p></div></section>
+ <section class="jr"><div class="hd"><div class="lab rv">Journal</div><h2 class="t56 rv">Appunti dallo studio.</h2></div><div class="jc-row">${jcards}</div></section>
+ ${contact()}
+ ${footer(false)}
+</div>`;
+}
+
+function projects(){
+ return `<section class="ph"><h1 class="t80 rv">Progetti selezionati.</h1>
+ <p class="lead rv" style="max-width:640px;margin-top:20px;color:#999">Uno sguardo curato agli spazi che Orma ha progettato, ristrutturato e trasformato.</p>
+ <div class="chips lab rv" style="margin-top:60px">${PCATS.map((c,i)=>`<button data-f="${c[0]}" class="${i?'':'on'}">${c[1]}</button>`).join('')}</div></section>
+ <div class="grid3" style="padding-top:36px;padding-bottom:128px;background:#fff">${INDEX_PROJECTS.map(s=>pcard(P(s))).join('')}</div>${footer(true)}`;
+}
+
+function project(slug){
+ const p=P(slug);if(!p)return notfound();
+ const more=PROJECTS.filter(x=>x.slug!==slug);const i=PROJECTS.findIndex(x=>x.slug===slug);
+ const three=[1,2,3].map(k=>PROJECTS[(i+k+ (k>0?0:0))%PROJECTS.length]);
+ const imgs=a=>a.map(x=>`<img src="${x}" alt="${p.name}" loading="lazy">`).join('');
+ const blk=(b,last)=>`<div class="blk${last?' last':''}"><h3>${b[0]}</h3>${b.slice(1).map(t=>`<p class="body">${t}</p>`).join('')}</div>`;
+ return `
+<section class="dh"><img src="${p.thumb}" alt="${p.name}"><div class="in"><div class="meta lab"><span>${p.loc}</span><span class="s">//</span><span>${p.year}</span></div><h1>${p.name}</h1></div></section>
+<section class="pd"><div class="side"><div class="stk"><h2>${p.name}</h2><p>${p.desc}</p>
+ <dl class="lab"><div><dt>Anno</dt><dd>${p.year}</dd></div><div><dt>Località</dt><dd>${p.loc}</dd></div><div><dt>Superficie</dt><dd>${p.size}</dd></div></dl></div></div>
+ <div class="main">${imgs(p.g1)}${blk(p.b1)}${imgs(p.g2)}${blk(p.b2,true)}</div></section>
+<section class="mr"><h2 class="t56 rv">Altro dallo studio.</h2><div class="grid3" style="padding:0">${three.map(pcard).join('')}</div></section>${footer(true)}`;
+}
+
+function articles(){
+ return `<section class="ph" style="position:relative"><h1 class="t80 rv">Approfondimenti dallo studio.</h1><span class="cnt t26">(06)</span>
+ <p class="lead rv">Un diario continuo di come lavora Orma, con cosa costruisce e cosa impara.</p>
+ <div class="chips lab rv" style="margin-top:100px">${ACATS.map((c,i)=>`<button data-f="${c[0]}" class="${i?'':'on'}">${c[1]}</button>`).join('')}</div></section>
+ <div class="grid3" style="padding-top:36px;padding-bottom:128px;row-gap:44px;background:#fff">${ARTICLES.map(acard).join('')}</div>${footer(true)}`;
+}
+
+function article(slug){
+ const a=A(slug);if(!a)return notfound();
+ const others=ARTICLES.filter(x=>x.slug!==slug).slice(0,3);
+ const words=a.tw.join(' ');
+ return `
+<section class="ah"><img src="${a.thumb}" alt=""><a class="back lab" href="#articles"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor"><path d="M9 5H1M4 2L1 5l3 3"/></svg>Tutti gli articoli</a>
+ <div class="rt lab">${a.read}</div>
+ <div class="tt"><div class="lab">${a.cat}</div><h1>${a.title}</h1><p>${a.ex}</p></div></section>
+<section class="ac"><div class="side"><div class="stk"><div class="who"><img src="${a.av}" alt=""><div><b>${a.author}</b><span>${a.role}</span></div></div>
+ <div class="cta"><h4>Hai un progetto in mente?</h4><p>Raccontaci lo spazio. Partiremo dalla luce.</p><a href="#contact">Contattaci</a></div></div></div>
+ <div class="main">${a.s.map(s=>`<h2>${s[0]}</h2>${s.slice(1).map(t=>`<p class="body">${t}</p>`).join('')}`).join('')}</div></section>
+<section class="mr art"><h2 class="t56 rv">Altri approfondimenti da esplorare.</h2><div class="grid3" style="padding:0">${others.map(acard).join('')}</div></section>${footer(true)}`;
+}
+
+function about(){
+ const aw=AWARDS.map((a,i)=>`<div class="aw-it${i==0?' open':''}"><span class="nm">${a[0]}</span><span class="pj2 lab">${a[1]}</span><span class="yr">${a[2]}</span><div class="ex"><p>${a[3]}</p><img src="${a[4]}" alt=""></div></div>`).join('');
+ const mx=METRICS.map(m=>`<div><div class="lb body">${m[0]}</div><div class="nb" data-from="${m[1]}" data-to="${m[2]}" data-s="${m[3]}">${m[2]}${m[3]}</div></div>`).join('');
+ const team=TEAM.map(t=>`<div><img src="${t[2]}" alt="${t[0]}" loading="lazy"><h4>${t[0]}</h4><span>${t[1]}</span></div>`).join('');
+ const lg=[...LOGOS,...LOGOS].map(x=>`<img src="${x}" alt="">`).join('');
+ return `
+<section class="ah2"><h1 class="t80 rv">La nostra storia.</h1><div class="lab">Scelti da grandi clienti</div><div class="logos"><div class="tr">${lg}</div></div></section>
+<section class="big"><div class="box"><img src="${I.big}" alt="" data-par="0.12"><h3>ORMA STUDIO.</h3></div></section>
+<section class="aw"><h2 class="t56 rv">Un decennio di lavoro, riconosciuto.</h2><div class="aw-list rv">${aw}</div></section>
+<section class="tm"><div><div class="stk"><div class="lab">Chi c'è dietro il lavoro</div><h2 class="t56 rv">Designer, pensatori e artigiani.</h2>
+ <strong>Via Savona 52, Milano.</strong><p class="body">Vieni a trovarci nel nostro studio a Milano. Siamo un piccolo team con una grande varietà di prospettive, ed è questo mix a far sentire ogni progetto Orma curato da ogni punto di vista.</p></div></div>
+ <div class="tg">${team}</div></section>
+<section class="two"><div><img src="${I.mb}" alt="" data-par="0.1"></div><div><img src="${I.w1}" alt="" data-par="0.1"></div></section>
+${contact()}${footer(false)}`;
+}
+
+function notfound(){return `<section class="ph"><h1 class="t80">Pagina non trovata.</h1><p class="body" style="margin-top:24px"><a href="#home" style="text-decoration:underline">Torna alla home</a></p></section>`}
+
+/* ---------- router ---------- */
+const app=$('#app');
+function route(){
+ let h=(location.hash||'#home').slice(1);
+ let html,scrollTo=null,theme='dark';
+ if(h==='home'||h==='contact'||h===''){html=home();theme='dark';if(h==='contact')scrollTo='contact'}
+ else if(h==='projects'){html=projects();theme='light'}
+ else if(h.startsWith('project-')){html=project(h.slice(8));theme='dark'}
+ else if(h==='articles'){html=articles();theme='light'}
+ else if(h.startsWith('article-')){html=article(h.slice(8));theme='dark'}
+ else if(h==='about'){html=about();theme='light'}
+ else {html=notfound();theme='light'}
+ document.body.classList.remove('menu-open');
+ app.innerHTML=html;
+ document.title=({home:'Orma — Studio di interior design',projects:'Progetti — Orma',articles:'Approfondimenti — Orma',about:'La nostra storia — Orma'})[h]||(h.startsWith('project-')?(P(h.slice(8))||{name:'Progetto'}).name+' — Orma':h.startsWith('article-')?'Journal — Orma':'Orma — Studio di interior design');
+ bind();
+ if(scrollTo){const el=document.getElementById(scrollTo);window.scrollTo(0,el?el.getBoundingClientRect().top+scrollY:0)}else window.scrollTo(0,0);
+ setTimeout(reveal,30);
+}
+function bind(){
+ /* striscia progetti */
+ const strip=$('.strip');
+ if(strip){const cards=$$('.pc',strip);const set=i=>cards.forEach((c,k)=>c.classList.toggle('active',k===i));
+  cards.forEach((c,i)=>{c.addEventListener('mouseenter',()=>{if(innerWidth>809)set(i)})});
+  strip.addEventListener('mouseleave',()=>{if(innerWidth>809)set(2)});}
+ /* servizi */
+ $$('.sv-it').forEach(it=>{const open=()=>{$$('.sv-it').forEach(x=>x.classList.toggle('open',x===it))};it.addEventListener('click',open);it.addEventListener('mouseenter',()=>{if(innerWidth>809)open()})});
+ /* premi */
+ $$('.aw-it').forEach(it=>{const open=()=>{$$('.aw-it').forEach(x=>x.classList.toggle('open',x===it))};it.addEventListener('click',open);it.addEventListener('mouseenter',()=>{if(innerWidth>809)open()})});
+ /* filtri */
+ $$('.chips').forEach(ch=>{ch.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$$('button',ch).forEach(x=>x.classList.toggle('on',x===b));const f=b.dataset.f;
+  $$('.pcard').forEach(c=>c.classList.toggle('hide',!(f==='all'||c.dataset.cats.split(' ').includes(f))));
+  $$('.acard').forEach(c=>c.classList.toggle('hide',!(f==='all'||c.dataset.cat===f)));})});
+ /* scroll interno */
+ $$('[data-scroll]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const el=document.getElementById(a.dataset.scroll);if(el)window.scrollTo({top:el.getBoundingClientRect().top+scrollY,behavior:'smooth'})}));
+ /* form */
+ $$('form[data-ct]').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();$('.fnote',f).textContent='Modulo dimostrativo: l\'invio sarà attivo sul sito pubblicato.'}));
+ $$('form[data-nl]').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();f.parentElement.querySelector('small').textContent='Modulo dimostrativo: l\'iscrizione sarà attiva sul sito pubblicato.'}));
+}
+let io;
+function reveal(){
+ if(io)io.disconnect();
+ io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);if(e.target.querySelector&&e.target.querySelector('.nb'))count(e.target)}}),{threshold:.08,rootMargin:'0px 0px -4% 0px'});
+ $$('.rv').forEach(el=>io.observe(el));
+ setTimeout(()=>$$('.rv:not(.in)').forEach(el=>{const r=el.getBoundingClientRect();if(r.top<innerHeight*1.2&&r.bottom>-50)el.classList.add('in')}),900);
+}
+function count(box){
+ $$('.nb',box).forEach(n=>{const f=+n.dataset.from,t=+n.dataset.to,s=n.dataset.s;const t0=performance.now();const step=now=>{const k=Math.min(1,(now-t0)/1600);const e=1-Math.pow(1-k,3);n.textContent=Math.round(f+(t-f)*e)+s;if(k<1)requestAnimationFrame(step)};n.textContent=f+s;requestAnimationFrame(step)});
+}
+/* parallax immagini */
+addEventListener('scroll',()=>{$$('[data-par]').forEach(im=>{const r=im.parentElement.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;const k=(r.top+r.height/2-innerHeight/2)/innerHeight;im.style.transform=`translateY(${(-k*60*(+im.dataset.par*8)).toFixed(1)}px)`})},{passive:true});
+
+/* colore header adattivo: bianco su scuro/immagini, nero su chiaro */
+function tone(x){
+ const y=34;
+ for(const el of document.elementsFromPoint(x,y)){
+  if(el.closest('#hdr')||el.closest('#menu'))continue;
+  if(el.tagName==='IMG'||el.tagName==='VIDEO')return false;
+  const c=getComputedStyle(el).backgroundColor.match(/[\d.]+/g);
+  if(c&&(c.length<4||+c[3]>0.5)){const l=(0.299*c[0]+0.587*c[1]+0.114*c[2]);return l>140}
+ }
+ return true;
+}
+function hdrTone(){
+ const h=$('#hdr');
+ const lg=h.querySelector('.logo'),mb=h.querySelector('.mbtn');
+ lg.style.color=tone(lg.getBoundingClientRect().left+20)?'#000':'';
+ mb.style.color=tone(mb.getBoundingClientRect().right-20)?'#000':'';
+}
+addEventListener('scroll',hdrTone,{passive:true});addEventListener('resize',hdrTone);addEventListener('hashchange',()=>setTimeout(hdrTone,80));
+setInterval(hdrTone,300);
+/* menu */
+$('#mbtn').addEventListener('click',()=>document.body.classList.toggle('menu-open'));
+$$('#menu a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('menu-open')));
+addEventListener('hashchange',route);
+route();
+
+</script>
+</body>
+</html>

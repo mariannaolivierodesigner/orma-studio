@@ -422,6 +422,8 @@ body.menu-open #menu li:nth-child(5) a{transition-delay:.35s}
   .two div{height:420px}
 }
 
+.tm1{grid-template-columns:1fr!important}.tm1 .stk{position:static}.tm1 .stk h2{margin-bottom:56px}
+
 </style>
 </head>
 <body>
@@ -658,16 +660,11 @@ function article(slug){
 function about(){
  const aw=AWARDS.map((a,i)=>`<div class="aw-it${i==0?' open':''}"><span class="nm">${a[0]}</span><span class="pj2 lab">${a[1]}</span><span class="yr">${a[2]}</span><div class="ex"><p>${a[3]}</p><img src="${a[4]}" alt=""></div></div>`).join('');
  const mx=METRICS.map(m=>`<div><div class="lb body">${m[0]}</div><div class="nb" data-from="${m[1]}" data-to="${m[2]}" data-s="${m[3]}">${m[2]}${m[3]}</div></div>`).join('');
- const team=TEAM.map(t=>`<div><img src="${t[2]}" alt="${t[0]}" loading="lazy"><h4>${t[0]}</h4><span>${t[1]}</span></div>`).join('');
  const lg=[...LOGOS,...LOGOS].map(x=>`<img src="${x}" alt="">`).join('');
  return `
 <section class="ah2"><h1 class="t80 rv">La nostra storia.</h1><div class="lab">Scelti da grandi clienti</div><div class="logos"><div class="tr">${lg}</div></div></section>
 <section class="big"><div class="box"><img src="${I.big}" alt="" data-par="0.12"><h3>ORMA STUDIO.</h3></div></section>
 <section class="aw"><h2 class="t56 rv">Un decennio di lavoro, riconosciuto.</h2><div class="aw-list rv">${aw}</div></section>
-<section class="tm"><div><div class="stk"><div class="lab">Chi c'è dietro il lavoro</div><h2 class="t56 rv">Designer, pensatori e artigiani.</h2>
- <strong>Via Savona 52, Milano.</strong><p class="body">Vieni a trovarci nel nostro studio a Milano. Siamo un piccolo team con una grande varietà di prospettive, ed è questo mix a far sentire ogni progetto Orma curato da ogni punto di vista.</p></div></div>
- <div class="tg">${team}</div></section>
-<section class="two"><div><img src="${I.mb}" alt="" data-par="0.1"></div><div><img src="${I.w1}" alt="" data-par="0.1"></div></section>
 ${contact()}${footer(false)}`;
 }
 

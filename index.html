@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Orma — Studio di interior design</title>
-<meta name="description" content="Orma è uno studio di interior design: progetti, servizi e approfondimenti dallo studio.">
+<title>Orma — Studio di architettura e interior design</title>
+<meta name="description" content="Orma è uno studio di architettura e interior design: progetti, servizi e approfondimenti dallo studio.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -491,6 +491,7 @@ const INDEX_PROJECTS=["casa-nella-valle","meridiana","via-delle-betulle","casa-d
 const PCATS=[["all","Tutti"],["res","Residenziale"],["com","Commerciale"],["new","Nuova costruzione"],["ren","Ristrutturazione"]];
 
 const SERVICES=[
+{t:"Progettazione architettonica",d:"Dal concept alla direzione lavori: Orma segue il progetto di nuove costruzioni, ampliamenti e ristrutturazioni, occupandosi di pratiche edilizie, coordinamento con i tecnici e assistenza in cantiere.",p:"€6.000",i:I.vh},
 {t:"Progettazione residenziale",d:"Orma lavora a stretto contatto con i proprietari di casa per sviluppare una visione coerente, occupandosi di tutto: dalla pianificazione degli spazi alla scelta dei materiali, dall'acquisto degli arredi all'installazione finale.",p:"€4.500",i:I.birch},
 {t:"Interni commerciali",d:"Spazi di lavoro e di vendita progettati per funzione, flusso e coerenza con il brand. Orma traduce l'identità di un'azienda in un ambiente fisico.",p:"€9.000",i:I.granary},
 {t:"Consulenza per ristrutturazioni",d:"Una guida mirata su layout, materiali e finiture prima dell'inizio dei lavori. Ideale per i clienti che vogliono un parere esperto fin dall'inizio, aiuta a evitare errori costosi.",p:"€600",i:I.xk},
@@ -535,7 +536,7 @@ const ARTICLES=[
 const ACATS=[["all","Tutti"],["Pratica di studio","Pratica di studio"],["Materiali","Materiali"],["Processo","Processo"]];
 
 const TEAM=[
-["Elena Orsini","Fondatrice e direttrice creativa",I.t1],["Matteo Ferraris","Interior designer senior",I.t2],
+["Elena Orsini","Fondatrice e direttrice creativa",I.t1],["Matteo Ferraris","Architetto senior",I.t2],
 ["Giulia Marchetti","Project manager",I.t3],["Sara Colombo","Specialista FF&E",I.t4],
 ["Chiara Valenti","Designer junior",I.t5],["Sofia Parodi","Brand e comunicazione",I.t6]];
 const AWARDS=[
@@ -596,16 +597,16 @@ function home(){
  const jr=['casa-nella-valle','meridiana','via-delle-betulle','casa-del-podere'];
  const jcards=ARTICLES.slice(0,4).map(a=>`<a class="jc rv" href="#article-${a.slug}"><div class="im"><img src="${a.thumb}" alt=""><i class="brk tr"></i><i class="brk bl"></i></div><div class="tx"><h3>${a.title}</h3><div class="au lab"><i></i>${a.author}</div></div></a>`).join('');
  return `
-<div class="hero"><img src="${I.hero}" alt="Interno minimale"><div class="in">
+<div class="hero"><img src="${I.hero}" alt="Interno di un progetto Orma"><div class="in">
  <h1><b>${BRAND}</b><span>STUDIO.</span></h1>
  <div class="meta lab"><span>Con sede a Milano</span><span class="s">//</span><span>Dal 2008</span></div>
- <p class="tag">${BRAND[0]+BRAND.slice(1).toLowerCase()} progetta spazi personali, senza tempo e pensati per le persone che li abitano.</p>
+ <p class="tag">Orma è uno studio di architettura e interior design: progetta spazi senza tempo, pensati per le persone che li abitano.</p>
  <a class="go lab" href="#" data-scroll="pj">Vedi i progetti ${ARROW}</a></div></div>
 <div id="home-body">
  <section class="pj" id="pj"><div class="strip">${strip}</div></section>
  <section class="sv"><div class="sv-grid"><div></div><div><div class="lab mut rv">Servizi</div><div class="sv-list rv">${sv}</div></div></div></section>
  <section class="ab"><div class="col l"><div class="tr">${col(COL_L)}</div></div><div class="col r"><div class="tr">${col(COL_R)}</div></div>
-  <div class="txt"><div class="lab rv">Chi siamo</div><p class="rv">Orma Studio è uno studio di interior design a servizio completo, nato dalla convinzione che i grandi spazi inizino dal saper ascoltare.</p><p class="rv d1">Un processo rigoroso, una profonda conoscenza dei materiali e un occhio attento a luce e proporzioni danno vita a interni che sembrano pensati e destinati a durare.</p></div></section>
+  <div class="txt"><div class="lab rv">Chi siamo</div><p class="rv">Orma Studio è uno studio di architettura e interior design a servizio completo, nato dalla convinzione che i grandi spazi inizino dal saper ascoltare.</p><p class="rv d1">Un processo rigoroso, una profonda conoscenza dei materiali e un occhio attento a luce e proporzioni danno vita a edifici e interni che sembrano pensati e destinati a durare.</p></div></section>
  <section class="jr"><div class="hd"><div class="lab rv">Journal</div><h2 class="t56 rv">Appunti dallo studio.</h2></div><div class="jc-row">${jcards}</div></section>
  ${contact()}
  ${footer(false)}
@@ -686,7 +687,7 @@ function route(){
  else {html=notfound();theme='light'}
  document.body.classList.remove('menu-open');
  app.innerHTML=html;
- document.title=({home:'Orma — Studio di interior design',projects:'Progetti — Orma',articles:'Approfondimenti — Orma',about:'La nostra storia — Orma'})[h]||(h.startsWith('project-')?(P(h.slice(8))||{name:'Progetto'}).name+' — Orma':h.startsWith('article-')?'Journal — Orma':'Orma — Studio di interior design');
+ document.title=({home:'Orma — Studio di architettura e interior design',projects:'Progetti — Orma',articles:'Approfondimenti — Orma',about:'La nostra storia — Orma'})[h]||(h.startsWith('project-')?(P(h.slice(8))||{name:'Progetto'}).name+' — Orma':h.startsWith('article-')?'Journal — Orma':'Orma — Studio di interior design');
  bind();
  if(scrollTo){const el=document.getElementById(scrollTo);window.scrollTo(0,el?el.getBoundingClientRect().top+scrollY:0)}else window.scrollTo(0,0);
  setTimeout(reveal,30);

@@ -424,6 +424,9 @@ body.menu-open #menu li:nth-child(5) a{transition-delay:.35s}
 
 .tm1{grid-template-columns:1fr!important}.tm1 .stk{position:static}.tm1 .stk h2{margin-bottom:56px}
 
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media(max-width:809px){.dk{display:none}}
+
 </style>
 </head>
 <body>
@@ -600,9 +603,9 @@ function home(){
  const jcards=ARTICLES.slice(0,4).map(a=>`<a class="jc rv" href="#article-${a.slug}"><div class="im"><img src="${a.thumb}" alt=""><i class="brk tr"></i><i class="brk bl"></i></div><div class="tx"><h3>${a.title}</h3><div class="au lab"><i></i>${a.author}</div></div></a>`).join('');
  return `
 <div class="hero"><img src="${I.hero}" alt="Interno di un progetto Orma"><div class="in">
- <h1><b>${BRAND}</b><span>STUDIO.</span></h1>
+ <h1 class="sr">Orma Studio</h1>
  <div class="meta lab"><span>Con sede a Milano</span><span class="s">//</span><span>Dal 2008</span></div>
- <p class="tag">Orma è uno studio di architettura e interior design: progetta spazi senza tempo, pensati per le persone che li abitano.</p>
+ <p class="tag">Orma è uno studio di architettura e interior design: <br class="dk">progetta spazi senza tempo, pensati per le persone che li abitano.</p>
  <a class="go lab" href="#" data-scroll="pj">Vedi i progetti ${ARROW}</a></div></div>
 <div id="home-body">
  <section class="pj" id="pj"><div class="strip">${strip}</div></section>

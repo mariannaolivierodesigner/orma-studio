@@ -62,6 +62,7 @@ body.menu-open #menu li:nth-child(5) a{transition-delay:.35s}
 
 /* hero home */
 .hero{position:fixed;inset:0 0 auto 0;height:100vh;z-index:0;background:#000;overflow:hidden}
+.hero picture{position:absolute;inset:0;display:block}
 .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.4),rgba(0,0,0,.26) 28%,rgba(0,0,0,.26) 62%,rgba(0,0,0,.48))}
 .hero .in{position:absolute;inset:0;z-index:2;color:#fff;padding:0 var(--pad)}
@@ -440,6 +441,7 @@ body.menu-open #menu li:nth-child(5) a{transition-delay:.35s}
 const BRAND="ORMA";
 const I={
 hero:"images/heroOrma.jpg",
+heroM:"images/heroMobile.jpg",
 vale:"images/WNlQpRB8d2f1SgqpQOjzVlzDTFg.png",meridian:"images/WFrJbQlXv9XaTZ7LsHRHkmZCbY.png",birch:"images/CjhfXiN6PXAwzajoL7fTNa8Vuc.png",croft:"images/tr77NWRfooGYzvFSUiHBkDZoJo.png",granary:"images/WysWO1cb7kNoRK5UjP1VKU7o10.png",six:"images/aWVd65dbLbCdBq0934GBHI0D4ZY.png",westport:"images/WZwBvdvyc5HSOAmCkdujMmZm4.png",mill:"images/8k4MNs2RKYK1zvjCzFdiSTKnPM.png",
 yk:"images/2Yk1H8lu4szlfwNgVikZePJNLs.png",vh:"images/VHnHvWhoLLo7c2s2gfNd3lQkDBg.png",he:"images/heiti4kilGfA5lpfPJFtmH4wNU.png",xk:"images/XKwPSb0dw53OTxIlCUoBd25Sk.png",mb:"images/MbjVvoX3H3ffz0gbUNAakJCqb7I.png",jm:"images/jMvBazUHvKhX1miCZodgjxnAec.png",l1:"images/l12XWsHZXJHmsjkzHYlPhdPnXQ.png",zm:"images/zmmaXGZ7qkqwsh5kGMxepwdOiE.png",w6:"images/WZ676a3iMhFqvQSjbkHS6gcTU.png",nq:"images/NqICsK20KsnMYL0o1WOAAfH9Qow.png",jk:"images/Jk3mUdQLO3LVpfHJE4CsOsvPZE.png",vy:"images/VY8mklhEwBDnYrwFKTo5BcdTSQ.png",lt:"images/lTciRpRheUcZFuDqMGmNuoR8rkA.png",x7:"images/X7i9YoTKq9ABF39b5G4ivS3kbI.png",om:"images/OMlc76tehQMRCFg9R6fncXUB9Ho.png",hz:"images/7HZlJMgxbaQwCLnnupp0xt8rgP4.png",ve:"images/0ve3RxIvfePwxma93bMpyZ57lbQ.png",ir:"images/irL9bQOttD8YH8ks4uLTflIouuo.png",g4:"images/G48S1jIP57MRVKZ9PSg0p8KoA.png",
 a1:"images/pEnl1jPkdwThUN9yjI8LiUZ0.jpg",a2:"images/5gv9jGZywhNOlUiuExe9kSlDz0.jpg",a3:"images/M22Le8fp9pP5P8wZXcOEyZPBo.png",a4:"images/uI9gyUrcP3BErgRPigV8r7J40OI.jpg",a5:"images/x7qWs8WHX1uFYlLInkTdWOjQhMg.png",a6:"images/AvvBp0DP4F5Y6twjq0b3bRN5hGc.jpg",
@@ -605,7 +607,7 @@ function home(){
  const jr=['casa-nella-valle','meridiana','via-delle-betulle','casa-del-podere'];
  const jcards=ARTICLES.slice(0,4).map(a=>`<a class="jc rv" href="#article-${a.slug}"><div class="im"><img src="${a.thumb}" alt=""><i class="brk tr"></i><i class="brk bl"></i></div><div class="tx"><h3>${a.title}</h3><div class="au lab"><i></i>${a.author}</div></div></a>`).join('');
  return `
-<div class="hero"><img src="${I.hero}" alt="Interno di un progetto Orma"><div class="in">
+<div class="hero"><picture><source media="(max-width:809px)" srcset="${I.heroM}"><img src="${I.hero}" alt="Interno di un progetto Orma"></picture><div class="in">
  <h1 class="sr">Orma Studio</h1>
  <div class="meta lab"><span>Con sede a Milano</span><span class="s">//</span><span>Dal 2008</span></div>
  <p class="tag">Orma è uno studio di architettura e interior design: <br class="dk">progetta spazi senza tempo, pensati per le persone che li abitano.</p>
